@@ -12,12 +12,7 @@ namespace DeadReckoned.ULog
         internal LogConfig()
         {
             _levelState = new bool[Enum.GetValues(typeof(LogLevel)).Length];
-
-            // Set all level states to true by default
-            for (int i = 0; i < _levelState.Length; ++i)
-            {
-                _levelState[i] = true;
-            }
+            SetAllLevels(true);
         }
 
         /// <summary>
@@ -29,6 +24,21 @@ namespace DeadReckoned.ULog
         public LogConfig SetLevel(LogLevel level, bool state)
         {
             _levelState[(int)level] = state;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the enabled state for all logging level.s
+        /// </summary>
+        /// <param name="state">The enabled state of the logging levels.</param>
+        /// <returns>A reference to this <see cref="LogConfig"/></returns>
+        public LogConfig SetAllLevels(bool state)
+        {
+            for (int i = 0; i < _levelState.Length; ++i)
+            {
+                _levelState[i] = state;
+            }
+
             return this;
         }
 
