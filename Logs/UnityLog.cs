@@ -24,6 +24,9 @@ namespace DeadReckoned.ULog.Logs
 
         public void Log(LogLevel level, string message, UnityEngine.Object context, Exception exception = null)
         {
+            if (!IsEnabledFor(level))
+                return;
+
             Log(new LoggingEvent()
             {
                 LoggerName = mName,
